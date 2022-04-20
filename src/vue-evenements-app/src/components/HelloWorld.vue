@@ -33,11 +33,28 @@
 </template>
 
 <script>
+import httpClient from '../api/httpClient.js'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data() {
+    return {
+      todos: []
+    }
+  },
+  created(){
+     httpClient.get(`/Evenements`)
+      .then((response) => {
+        this.todos  = response.data;
+        alert("succes de la requete!!!")
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
+ 
 }
 </script>
 

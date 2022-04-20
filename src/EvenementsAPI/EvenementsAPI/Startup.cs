@@ -26,6 +26,7 @@ namespace EvenementsAPI
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,6 +37,11 @@ namespace EvenementsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins, policy => policy.WithOrigins("http://localhost:8080", "http://127.0.0.1:8080").AllowAnyHeader().AllowAnyMethod());
+            });
+
             services.AddScoped<IEvenementRepository, EvenementRepository>();
             services.AddScoped<IVilleRepository, VilleRepository>();
             services.AddScoped<IRepository<Categorie>, Repository<Categorie>>();
@@ -112,7 +118,8 @@ namespace EvenementsAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EvenementsAPI v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseRouting();
 
