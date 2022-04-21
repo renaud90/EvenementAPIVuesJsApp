@@ -25,4 +25,10 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+#footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; 
+}
 </style>
