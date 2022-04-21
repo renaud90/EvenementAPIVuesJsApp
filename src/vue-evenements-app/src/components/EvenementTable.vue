@@ -1,6 +1,6 @@
 <template>
     <div class="evenementsTable">
-        <table>
+        <table border = 1>
             <tr id="headerRow">
                 <th id="titreCol">Titre</th>
                 <th id="villeCol">Ville</th>
@@ -17,7 +17,11 @@
                 <td>{{e.prix === 0 ? "Gratuit" : e.prix + "$"}}</td>
                 <td>{{e.categories === "" ? "Aucune" : e.categories}}</td>
                 <td>{{"Début: " + new Date(e.dateDebut).toLocaleString("en-US")}} <br> {{"Fin: " + new Date(e.dateFin).toLocaleString("en-US")}}</td>
-                <td></td>
+                <td>
+                    <img class="actionButton" src="../assets/icons/plus.png" title="Détails"/>
+                    <img class="actionButton" src="../assets/icons/participate.png" title="Participer"/>
+                    <img class="actionButton" src="../assets/icons/delete.png" title="Supprimer"/>
+                </td>
             </tr>
         </table>
     </div>
@@ -29,7 +33,7 @@ import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'EvenementsTable',
     props: {
-
+    
     },
     data() {
         return {
@@ -53,8 +57,21 @@ export default {
 </script>
 
 <style>
+    td, th{
+        padding:5px 5px;
+    }
     .evenementsTable{
-        width:50%;
+        width:800px;
         margin:auto;
+    }
+    .actionButton{
+        cursor:pointer;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        padding:0px 5px;
+    }
+    #actionCol{
+        width:100px;
     }
 </style>
