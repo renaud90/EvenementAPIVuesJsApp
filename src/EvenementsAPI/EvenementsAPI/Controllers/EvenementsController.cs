@@ -77,10 +77,11 @@ namespace EvenementsAPI.Controllers
         [ProducesResponseType(typeof(EvenementDTO), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [AllowAnonymous]
-        public ActionResult<EvenementDTO> GetParticipations(int id)
+        public ActionResult<IEnumerable<ParticipationDTO>> GetParticipations(int id)
         {
-            var evenement = _evenementsBL.GetParticipations(id);
-            return evenement is null ? NotFound(new { Errors = $"Element introuvable (id = {id})" }) : Ok(evenement);
+            var evenement = _evenementsBL.Get(id);
+            var participations = _evenementsBL.GetParticipations(id);
+            return evenement is null ? NotFound(new { Errors = $"Element introuvable (id = {id})" }) : Ok(participations);
         }
 
         // POST api/usagers
