@@ -9,11 +9,10 @@
 
 <script>
 import EvenementsTable from '@/components/EvenementTable.vue'
-
 export default {
   name: 'EvenementsView',
   components: {
-    EvenementsTable
+    EvenementsTable,
   }
 }
 </script>

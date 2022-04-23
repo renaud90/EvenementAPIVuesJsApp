@@ -27,7 +27,8 @@ namespace EvenementsAPI.BusinessLogic
                 EvenementId = value.EvenementId,
                 NbPlaces = value.NbPlaces,
                 Nom = value.Nom,
-                Prenom = value.Prenom
+                Prenom = value.Prenom,
+                IsValid = true
             };
             ValiderModeleDeParticipation(participation);
 
