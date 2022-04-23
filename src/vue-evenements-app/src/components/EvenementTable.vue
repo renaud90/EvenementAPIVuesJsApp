@@ -1,6 +1,6 @@
 <template>
     <div class="evenementsTable">
-        <table>
+        <table border = 1>
             <tr id="headerRow">
                 <th id="titreCol">Titre</th>
                 <th id="villeCol">Ville</th>
@@ -17,19 +17,24 @@
                 <td>{{e.prix === 0 ? "Gratuit" : e.prix + "$"}}</td>
                 <td>{{e.categories === "" ? "Aucune" : e.categories}}</td>
                 <td>{{"Début: " + new Date(e.dateDebut).toLocaleString("en-US")}} <br> {{"Fin: " + new Date(e.dateFin).toLocaleString("en-US")}}</td>
-                <td></td>
+                <td>
+                    <img class="actionButton" src="../assets/icons/plus.png" title="Détails"/>
+                    <img class="actionButton" src="../assets/icons/participate.png" title="Participer"/>
+                    <img class="actionButton" src="../assets/icons/delete.png" title="Supprimer" @click="supprimerEvenement(e.id)"/>
+                </td>
             </tr>
         </table>
     </div>
 </template>
 
 <script>
+import httpClient from '../api/httpClient.js'
 import { mapState, mapMutations } from 'vuex';
-//import httpClient from '../api/httpClient.js'
+
 export default {
     name: 'EvenementsTable',
     props: {
-
+    
     },
     data() {
         return {
@@ -39,11 +44,20 @@ export default {
         this.loadAllEvenements();
     },
     methods:{
-        ...mapMutations({getAllEvenements: 'getAllEvenements'}),
+        ...mapMutations({getAllEvenements: 'getAllEvenements', deleteEvenement: 'deleteEvenement'}),
         loadAllEvenements(){
             if(this.evenements.length === 0){
                 this.getAllEvenements()
             }
+        },
+        supprimerEvenement(id){
+            httpClient.delete(`Evenements/` + id)
+            .then(() => {
+                this.deleteEvenement(id)
+            })
+            .catch(e => {
+                console.log(e)
+            })
         }
     },
     computed: {
@@ -53,8 +67,21 @@ export default {
 </script>
 
 <style>
-    .evenementsTable{
-        width:50%;
+    td, th{
+        padding:5px 5px;
+    }
+    .evenementsTable, table{
+        width:1000px;
         margin:auto;
+    }
+    .actionButton{
+        cursor:pointer;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        padding:0px 5px;
+    }
+    #headerRow{
+        background-color:aquamarine;
     }
 </style>

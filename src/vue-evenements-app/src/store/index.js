@@ -36,6 +36,9 @@ export default createStore({
         .catch((error) => {
             console.log(error);
         })
+    },
+    deleteEvenement(state, id){
+        state.evenements = state.evenements.filter(_ => _.id !== id)
     }
   },
   actions: {

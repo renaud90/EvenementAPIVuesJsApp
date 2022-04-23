@@ -1,10 +1,37 @@
 <template>
   <BaseLayout>
     <div class="login">
-      <h1>This is an login page</h1>
-      <div><label for="username">Username: </label><input type="email" name="username" id="username"></div>
-      <div><label for="password">Password: </label><input type="password" name="password" id="password"></div>
-      <div><button @click="$router.push({name: 'home'})">submit</button></div>
+      <h1>Profil utilisateur</h1>
+      <div :class="mainOidc.isAuthenticated ? '' : 'invisible'">Informations: {{mainOidc.userProfile.name}}</div>
+      <h4 :class="mainOidc.isAuthenticated ? '' : 'invisible'" id="deconnexion" @click="deconnexion()">Me déconnecter</h4>
     </div>
   </BaseLayout>
 </template>
+
+<script>
+  import mainOidc from '../api/authClient.js'
+  export default {
+    name: "LoginView",
+    data(){
+      return {
+        mainOidc: mainOidc
+      }
+    },
+    methods:{
+      deconnexion(){
+        this.mainOidc.signOut();
+      }
+    }
+  };
+  
+</script>
+
+<style>
+  #deconnexion{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .invisible{
+    visibility: hidden;
+  }
+</style>
