@@ -20,7 +20,7 @@
                 <td>
                     <img class="actionButton" src="../assets/icons/plus.png" title="Détails"/>
                     <img class="actionButton" src="../assets/icons/participate.png" title="Participer"/>
-                    <img class="actionButton" src="../assets/icons/delete.png" title="Supprimer"/>
+                    <img class="actionButton" src="../assets/icons/delete.png" title="Supprimer" @click="supprimerEvenement(e.id)"/>
                 </td>
             </tr>
         </table>
@@ -28,8 +28,9 @@
 </template>
 
 <script>
+import httpClient from '../api/httpClient.js'
 import { mapState, mapMutations } from 'vuex';
-//import httpClient from '../api/httpClient.js'
+
 export default {
     name: 'EvenementsTable',
     props: {
@@ -43,11 +44,20 @@ export default {
         this.loadAllEvenements();
     },
     methods:{
-        ...mapMutations({getAllEvenements: 'getAllEvenements'}),
+        ...mapMutations({getAllEvenements: 'getAllEvenements', deleteEvenement: 'deleteEvenement'}),
         loadAllEvenements(){
             if(this.evenements.length === 0){
                 this.getAllEvenements()
             }
+        },
+        supprimerEvenement(id){
+            httpClient.delete(`Evenements/` + id)
+            .then(() => {
+                this.deleteEvenement(id)
+            })
+            .catch(e => {
+                console.log(e)
+            })
         }
     },
     computed: {
@@ -60,8 +70,8 @@ export default {
     td, th{
         padding:5px 5px;
     }
-    .evenementsTable{
-        width:800px;
+    .evenementsTable, table{
+        width:1000px;
         margin:auto;
     }
     .actionButton{
@@ -71,7 +81,7 @@ export default {
         height: 20px;
         padding:0px 5px;
     }
-    #actionCol{
-        width:100px;
+    #headerRow{
+        background-color:aquamarine;
     }
 </style>

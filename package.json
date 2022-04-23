@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "vue-oidc-client": "^1.0.0-alpha.4"
+  }
+}

@@ -79,6 +79,26 @@ namespace IdentityServerAspNetIdentity
                         "web2ApiScope",
                     }
 
+                },
+                new Client
+                {
+                     ClientId = "web2_ui",
+                     ClientName = "Web2.UI Vuejs oidc client",
+                     ClientSecrets = {new Secret("secret".Sha256())}, 
+                     AllowedGrantTypes = GrantTypes.Code,
+                     RequireClientSecret = false,
+                     RedirectUris = {
+                         "http://localhost:8080/auth/signinsilent/vuejs",
+                         "http://localhost:8080/auth/signinwin/vuejs",
+                         "http://localhost:8080/auth/signinpop/vuejs"
+                     },
+                     PostLogoutRedirectUris = {"http://localhost:8080/" },
+                     AllowedCorsOrigins = {"http://localhost:8080"},
+                     AllowedScopes = { 
+                        "web2ApiScope",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                     }
                 }
             };
     }
