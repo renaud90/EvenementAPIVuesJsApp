@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button @click="sho = true">Afficher</button>
     <div v-if="sho" class="englob">
       <div class="describ">
         <h3>{{ this.evenement.titre }}</h3>
@@ -40,8 +39,8 @@
             <p>{{ this.evenement.dateFin }}</p>
           </div>
         </div>
-        <button class="fermer" v-on:click="sho = false">
-          <div>Fermer</div>
+        <button class="fermer" >
+          <router-link to="/evenements">Fermer</router-link>
         </button>
       </div>
     </div>
@@ -50,14 +49,14 @@
 
 <script>
 import { mapState } from "vuex";
-//import httpClient from '../api/httpClient.js'
+
 export default {
-  name: "EvenementsDetails",
-  props: { id: Number },
+  name: "EvenementDetails",
+  props: { id: String },
   data() {
     return {
-      sho: false,
-      evenement: this.evenements.select((x) => x.id === this.id)[0],
+      sho: true,
+      evenement: {},
     };
   },
 
@@ -65,6 +64,9 @@ export default {
   computed: {
     ...mapState({ evenements: "evenements" }),
   },
+  created(){
+    this.evenement = this.evenements.filter((x) => x.id == this.id)[0];
+  }
 };
 </script>
 

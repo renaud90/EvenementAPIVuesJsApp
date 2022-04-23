@@ -93,7 +93,7 @@ namespace EvenementsAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Consumes(MediaTypeNames.Application.Json)]
-        [Authorize(Roles ="manager")]
+        //[Authorize(Roles ="manager")]
         public ActionResult Post([FromBody] EvenementDTO value)
         {
             value = _evenementsBL.Add(value);

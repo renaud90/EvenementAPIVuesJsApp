@@ -39,6 +39,11 @@ export default createStore({
     },
     deleteEvenement(state, id){
         this.state.evenements = this.state.evenements.filter(_ => _.id != id)
+    },
+    addParticipation(state, data){
+        console.log(data.nbPlaces);
+        this.state.evenements.filter(_ => _.id == data.idEvenement)[0].nbParticipations += data.nbPlaces;
+        //console.log(this.state.evenements.filter(_ => _.id == idEvenement)[0].nbParticipations);
     }
   },
   actions: {

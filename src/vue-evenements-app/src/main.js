@@ -7,8 +7,9 @@ import mainOidc from './api/authClient.js'
 
 mainOidc.startup().then(ok => {
     if (ok) {
-    const app = createApp(App).use(store).use(router).component('BaseLayout', BaseLayout).mount('#app')
+    const app = createApp(App)
     app.config.globalProperties.$oidc = mainOidc;
+    app.use(store).use(router).component('BaseLayout', BaseLayout).mount('#app')
     }
    })
 

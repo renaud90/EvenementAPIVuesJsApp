@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import EvenementsTable from '../views/EvenementsView.vue'
 import mainOidc from '../api/authClient.js'
-
+import EvenementDetailsView from '../views/EvenementDetailsView.vue'
+import ParticiperView from '../views/ParticiperView.vue'
 const routes = [
   {
     path: '/',
@@ -23,7 +24,19 @@ const routes = [
   {
     path: '/evenements',
     name: 'evenements',
-    component: EvenementsTable
+    components: {
+      default: EvenementsTable,
+    },
+    children: [
+      {
+        path: '/evenements/:id',
+        component: EvenementDetailsView
+      },
+      {
+        path: '/evenements/:id/participer',
+        component: ParticiperView
+      },
+    ]
   }
 ]
 

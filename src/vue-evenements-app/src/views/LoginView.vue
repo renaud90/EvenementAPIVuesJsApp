@@ -19,7 +19,7 @@
     },
     methods:{
       deconnexion(){
-        this.mainOidc.signOut();
+        mainOidc.signOut();
       }
     }
   };
