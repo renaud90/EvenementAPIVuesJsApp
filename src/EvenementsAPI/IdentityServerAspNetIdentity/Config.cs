@@ -84,7 +84,6 @@ namespace IdentityServerAspNetIdentity
                 {
                      ClientId = "web2_ui",
                      ClientName = "Web2.UI Vuejs oidc client",
-                     ClientSecrets = {new Secret("secret".Sha256())}, 
                      AllowedGrantTypes = GrantTypes.Code,
                      RequireClientSecret = false,
                      RedirectUris = {
@@ -95,9 +94,9 @@ namespace IdentityServerAspNetIdentity
                      PostLogoutRedirectUris = {"http://localhost:8080/" },
                      AllowedCorsOrigins = {"http://localhost:8080"},
                      AllowedScopes = { 
-                        "web2ApiScope",
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        "web2ApiScope"
                      }
                 }
             };

@@ -39,7 +39,10 @@ namespace EvenementsAPI
         {
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins, policy => policy.WithOrigins("http://localhost:8080", "http://127.0.0.1:8080").AllowAnyHeader().AllowAnyMethod());
+                options.AddPolicy(name: MyAllowSpecificOrigins, policy => policy.WithOrigins("http://localhost:8080", "http://127.0.0.1:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
             });
 
             services.AddScoped<IEvenementRepository, EvenementRepository>();
@@ -129,7 +132,7 @@ namespace EvenementsAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers().RequireAuthorization();
+                endpoints.MapControllers();//.RequireAuthorization();
             });
         }
     }
