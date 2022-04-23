@@ -128,7 +128,7 @@ namespace EvenementsAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [Authorize(Roles = "manager")]
+        //[Authorize(Roles = "manager")]
         public ActionResult Delete(int id)
         {
             _evenementsBL.Delete(id);

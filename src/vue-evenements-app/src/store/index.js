@@ -38,7 +38,7 @@ export default createStore({
         })
     },
     deleteEvenement(state, id){
-        state.evenements = state.evenements.filter(_ => _.id !== id)
+        this.state.evenements = this.state.evenements.filter(_ => _.id != id)
     }
   },
   actions: {
